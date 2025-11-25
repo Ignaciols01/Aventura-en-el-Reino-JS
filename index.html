@@ -1,11 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aventura en el Reino JS</title>
+    <title>Aventura en el reino JS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
+    <main class="escena">
+
+        <header class="top-header">
+            <img src="img/personaje/ct-cs2.png" alt="Operador CT" class="character-image">
+            <h1 class="character-name">OPERADOR CT</h1>
+        </header>
+
+        <section class="main-body">
+
+            <div class="estadisticas">
+                <div class="caja-stats">Ataque: 0</div>
+                <div class="caja-stats">Defensa: 0</div>
+                <div class="caja-stats">Salud: 100</div>
+                <div class="caja-stats">Puntos: 0</div>
+            </div>
+
+            <button class="btn-continuar">Continuar</button>
+
+        </section>
+
+
+        <!-- Escena 2 - MERCADO -->
+
+        <section id="scene-2" class="escena" style="">
+            <header class="scene-header">
+                <h2 class="section-title">ARMERÍA <span class="accent-text">CS:GO</span></h2>
+                <div class="wallet-display">SALDO: <span class="accent-text">$800</span></div>
+            </header>
+
+            <div class="market-grid">
+
+                <article class="product-card" id="prod-1">
+                    <div class="image-box">
+                        <span class="feedback-icon">✓</span>
+                        <img src="img/mercado/Kevlar-mercado.png" alt="Kevlar" class="prod-img">
+                    </div>
+                    <div class="prod-info">
+                        <h3>CHALECO KEVLAR</h3>
+                        <p class="bonus">BONUS: <span class="stat-up">+50 DEF</span></p>
+                        <p class="price">$650</p>
+                        <button class="btn-buy" onclick="toggleCart(this)">AÑADIR</button>
+                    </div>
+                </article>
+
+                <article class="product-card" id="prod-2">
+                    <div class="image-box">
+                        <span class="feedback-icon">✓</span>
+                        <img src="img/mercado/Kit-mercado.png" alt="Defuse Kit" class="prod-img">
+                    </div>
+                    <div class="prod-info">
+                        <h3>DEFUSE KIT</h3>
+                        <p class="bonus">BONUS: <span class="stat-up">+20 INT</span></p>
+                        <p class="price">$400</p>
+                        <button class="btn-buy" onclick="toggleCart(this)">AÑADIR</button>
+                    </div>
+                </article>
+
+                <article class="product-card" id="prod-3">
+                    <div class="image-box">
+                        <span class="feedback-icon">✓</span>
+                        <img src="img/mercado/GranadaHE-mercado.png" alt="HE Grenade" class="prod-img">
+                    </div>
+                    <div class="prod-info">
+                        <h3>GRANADA HE</h3>
+                        <p class="bonus">BONUS: <span class="stat-up">+30 ATK</span></p>
+                        <p class="price">$300</p>
+                        <button class="btn-buy" onclick="toggleCart(this)">AÑADIR</button>
+                    </div>
+                </article>
+
+                <article class="product-card" id="prod-4">
+                    <div class="image-box">
+                        <span class="feedback-icon">✓</span>
+                        <img src="img/mercado/M4A4-mercado.png" alt="M4A4" class="prod-img">
+                    </div>
+                    <div class="prod-info">
+                        <h3>M4A4 RIFLE</h3>
+                        <p class="bonus">BONUS: <span class="stat-up">+80 ATK</span></p>
+                        <p class="price">$3100</p>
+                        <button class="btn-buy" onclick="toggleCart(this)">AÑADIR</button>
+                    </div>
+                </article>
+
+                <article class="product-card" id="prod-5">
+                    <div class="image-box">
+                        <span class="feedback-icon">✓</span>
+                        <img src="img/mercado/AK-47-mercado.png" alt="Ak-47" class="prod-img">
+                    </div>
+                    <div class="prod-info">
+                        <h3>AK-47</h3>
+                        <p class="bonus">BONUS: <span class="stat-up">+90 ATK</span></p>
+                        <p class="price">$2700</p>
+                        <button class="btn-buy" onclick="toggleCart(this)">AÑADIR</button>
+                    </div>
+                </article>
+
+                <article class="product-card" id="prod-4">
+                    <div class="image-box">
+                        <span class="feedback-icon">✓</span>
+                        <img src="img/mercado/BayonetaM9-mercado.png" alt="BAYONETA M9" class="prod-img">
+                    </div>
+                    <div class="prod-info">
+                        <h3>BAYONETA M9</h3>
+                        <p class="bonus">BONUS: <span class="stat-up">+120 ATK</span></p>
+                        <p class="price">$5000</p>
+                        <button class="btn-buy" onclick="toggleCart(this)">AÑADIR</button>
+                    </div>
+                </article>
+            </div>
+
+            <hr class="separator">
+
+            <h3 class="section-subtitle">INVENTARIO ACTUAL</h3>
+            <div class="inventory-grid" id="inventory-container">
+                <div class="inv-slot empty"></div>
+                <div class="inv-slot empty"></div>
+                <div class="inv-slot empty"></div>
+                <div class="inv-slot empty"></div>
+            </div>
+
+            <div class="nav-area">
+                <button class="continue-btn">CONFIRMAR COMPRA</button>
+            </div>
+
+        </section>
+    </main>
+
 </body>
+
 </html>
