@@ -3,10 +3,9 @@ import { Enemigo, Jefe } from './clases/Enemigo.js';
 import { obtenerCatalogoConDescuentoAleatorio, buscarProducto } from './modulos/Mercado.js';
 import { combate } from './modulos/Batalla.js';
 import { distinguirJugador } from './modulos/Ranking.js';
-// Importante: Uso 'Constante.js' porque así se ve en tu captura de pantalla
 import { ESCENAS } from './constantes.js'; 
+import confetti from 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/+esm';
 
-// --- ESTADO DEL JUEGO ---
 const juego = {
     jugador: new Jugador("Operador CT", "img/personaje/ct-cs2.png"),
     catalogoActual: [],
@@ -19,14 +18,12 @@ const juego = {
     indiceEnemigo: 0
 };
 
-// --- NAVEGACIÓN ---
 function cambiarEscena(id) {
     document.querySelectorAll('.escena').forEach(e => e.classList.remove('activa'));
     
     const escena = document.getElementById(id);
     if(escena) escena.classList.add('activa');
 
-    // Hooks de lógica
     if (id === ESCENAS.MERCADO) {
         cargarMercado();
         actualizarInventarioVisual(); 
@@ -39,10 +36,12 @@ function cambiarEscena(id) {
         iniciarBatalla();
         actualizarInventarioVisual(); 
     } 
-    if (id === ESCENAS.FINAL) mostrarRanking();
+    if (id === ESCENAS.FINAL) {
+        mostrarRanking();
+        lanzarConfeti();
+    }
 }
 
-// --- LÓGICA MERCADO ---
 function cargarMercado() {
     if (juego.catalogoActual.length === 0) {
         juego.catalogoActual = obtenerCatalogoConDescuentoAleatorio();
@@ -69,15 +68,12 @@ function cargarMercado() {
     }
 }
 
-// --- ACTUALIZAR INVENTARIO (DINÁMICO E INFINITO) ---
 function actualizarInventarioVisual() {
     const barrasInventario = document.querySelectorAll('.inventario');
 
     barrasInventario.forEach(barra => {
-        // 1. Borramos todo el contenido anterior
         barra.innerHTML = ''; 
 
-        // 2. Por cada objeto real, creamos un div nuevo
         juego.jugador.inventario.forEach(item => {
             const slot = document.createElement('div');
             slot.className = 'slot'; 
@@ -92,7 +88,6 @@ function actualizarInventarioVisual() {
     });
 }
 
-// --- INTERACCIÓN CARRITO (SIN LÍMITE) ---
 window.toggleCart = function(btn) {
     const tarjeta = btn.closest('.item');
     const nombre = tarjeta.querySelector('h3').textContent;
@@ -103,11 +98,9 @@ window.toggleCart = function(btn) {
     tarjeta.classList.toggle('seleccionado');
     
     if (tarjeta.classList.contains('seleccionado')) {
-        // --- COMPRAR ---
         btn.textContent = "RETIRAR";
         juego.jugador.comprarObjeto(prod);
         
-        // Animación de la imagen del producto
         const imgBox = tarjeta.querySelector('.item-img');
         if(imgBox) {
             imgBox.classList.add('animate-added');
@@ -115,7 +108,6 @@ window.toggleCart = function(btn) {
         }
 
     } else {
-        // --- RETIRAR ---
         btn.textContent = "AÑADIR";
         const index = juego.jugador.inventario.findIndex(p => p.nombre === prod.nombre);
         if (index > -1) {
@@ -123,11 +115,9 @@ window.toggleCart = function(btn) {
         }
     }
 
-    // Actualizar la barra visual
     actualizarInventarioVisual(); 
 };
 
-// --- UI: ESTADÍSTICAS ---
 function actualizarStatsUI() {
     const j = juego.jugador;
     document.getElementById('final-atk').textContent = j.obtenerAtaqueTotal();
@@ -136,7 +126,6 @@ function actualizarStatsUI() {
     document.getElementById('final-score').textContent = j.puntos;
 }
 
-// --- LÓGICA DE BATALLA (CON ANIMACIONES) ---
 function iniciarBatalla() {
     const enemigo = juego.enemigos[juego.indiceEnemigo];
     
@@ -145,28 +134,22 @@ function iniciarBatalla() {
         return;
     }
 
-    // 1. Poner imagen del enemigo
     const imgEnemigo = document.querySelector('#img-enemigo');
     if(imgEnemigo) imgEnemigo.src = enemigo.imagen;
 
-    // 2. BUSCAR IMÁGENES PARA LA ANIMACIÓN
-    // Nota: Asegúrate de que tu imagen del jugador en el HTML tenga alt="Jugador"
     const imgJugador = document.querySelector('.arena img[alt="Jugador"]');
-
-    // 3. FUNCIÓN PARA REINICIAR ANIMACIÓN (Reflow)
+    
     const reiniciarAnimacion = (elemento, claseAnimacion) => {
         if (elemento) {
             elemento.classList.remove(claseAnimacion); 
-            void elemento.offsetWidth; // Truco del reflow
+            void elemento.offsetWidth;
             elemento.classList.add(claseAnimacion);    
         }
     };
 
-    // 4. LANZAR ANIMACIONES
     reiniciarAnimacion(imgJugador, 'entrada-izquierda');
     reiniciarAnimacion(imgEnemigo, 'entrada-derecha');
 
-    // 5. LÓGICA MATEMÁTICA DEL COMBATE
     const resultado = combate(enemigo, juego.jugador);
     
     const titulo = document.getElementById('battle-msg');
@@ -198,7 +181,6 @@ function iniciarBatalla() {
     }
 }
 
-// --- UI: FINAL ---
 function mostrarRanking() {
     const rango = distinguirJugador(juego.jugador.puntos);
     const rankEl = document.getElementById('rank-final');
@@ -208,7 +190,33 @@ function mostrarRanking() {
     if(scoreEl) scoreEl.textContent = juego.jugador.puntos;
 }
 
-// --- ASIGNACIÓN DE EVENTOS ---
+function lanzarConfeti() {
+    const duracion = 3000;
+    const animationEnd = Date.now() + duracion;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    const randomInRange = (min, max) => Math.random() * (max - min) + min;
+
+    const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duracion);
+        
+        confetti(Object.assign({}, defaults, { 
+            particleCount, 
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } 
+        }));
+        confetti(Object.assign({}, defaults, { 
+            particleCount, 
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } 
+        }));
+    }, 250);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#scene-1 .boton').onclick = () => cambiarEscena(ESCENAS.MERCADO);
     document.querySelector('#scene-2 .boton').onclick = () => cambiarEscena(ESCENAS.ESTADO);
