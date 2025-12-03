@@ -378,7 +378,6 @@ body {
 
 /* Tablets y pantallas medianas (hasta 768px) */
 @media (max-width: 768px) {
-    /* Forzamos 2 columnas en vez de 3 para que no se vea apretado */
     .grid.cols-3 {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -397,7 +396,7 @@ body {
     }
 }
 
-/* Móviles pequeños (hasta 480px - Cubre el requisito de 360px) */
+/* Móviles pequeños */
 @media (max-width: 480px) {
     
     /* Todo a una sola columna */
@@ -424,7 +423,6 @@ body {
         padding-bottom: 5px;
     }
     
-    /* Reducimos un poco el título si es muy largo */
     .titulo {
         font-size: 1.1rem;
     }
