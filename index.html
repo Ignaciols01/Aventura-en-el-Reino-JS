@@ -10,6 +10,10 @@
 
     <main id="game-container">
 
+        <!-- ========================================== -->
+        <!-- ESCENA 1: INICIO                           -->
+        <!-- ========================================== -->
+        <!-- Nota: "escena" y "activa" son las nuevas clases del CSS optimizado -->
         <section id="scene-1" class="escena activa">
             <div class="tarjeta">
                 <header class="cabecera">
@@ -18,6 +22,7 @@
                 </header>
 
                 <div class="contenido">
+                    <!-- Estadísticas usando la clase 'grid cols-2' y 'item' -->
                     <div class="grid cols-2">
                         <div class="item">Ataque: 0</div>
                         <div class="item">Defensa: 0</div>
@@ -25,24 +30,31 @@
                         <div class="item">Puntos: 0</div>
                     </div>
                     
+                    <!-- Botón para avanzar -->
                     <button class="boton">CONTINUAR</button>
                 </div>
             </div>
         </section>
 
 
+        <!-- ========================================== -->
+        <!-- ESCENA 2: MERCADO                          -->
+        <!-- ========================================== -->
         <section id="scene-2" class="escena">
             <div class="tarjeta">
                 <header class="cabecera">
                     <h2 class="titulo">ARMERÍA <span class="texto-acento">CS:GO</span></h2>
-                    <div class="saldo">SALDO: $5000</div>
+                    <!-- Aquí se mostrará el saldo si decides implementarlo -->
+                    <div class="saldo">SALDO: $25000</div>
                 </header>
 
                 <div class="contenido">
                     
+                    <!-- Caja con Scroll para los productos -->
                     <div class="scroll-box">
                         <div class="grid cols-3">
 
+                            <!-- Producto 1 -->
                             <article class="item" id="prod-1">
                                 <div class="item-img">
                                     <img src="img/mercado/Kevlar-mercado.png" alt="Kevlar">
@@ -50,9 +62,11 @@
                                 <h3>CHALECO KEVLAR</h3>
                                 <p class="desc">BONUS: +50 DEF</p>
                                 <p class="precio">$650</p>
+                                <!-- La función toggleCart está en main.js -->
                                 <button class="boton-peque" onclick="toggleCart(this)">AÑADIR</button>
                             </article>
 
+                            <!-- Producto 2 -->
                             <article class="item" id="prod-2">
                                 <div class="item-img">
                                     <img src="img/mercado/Kit-mercado.png" alt="Kit">
@@ -63,6 +77,7 @@
                                 <button class="boton-peque" onclick="toggleCart(this)">AÑADIR</button>
                             </article>
 
+                            <!-- Producto 3 -->
                             <article class="item" id="prod-3">
                                 <div class="item-img">
                                     <img src="img/mercado/GranadaHE-mercado.png" alt="HE">
@@ -73,6 +88,7 @@
                                 <button class="boton-peque" onclick="toggleCart(this)">AÑADIR</button>
                             </article>
 
+                            <!-- Producto 4 -->
                             <article class="item" id="prod-4">
                                 <div class="item-img">
                                     <img src="img/mercado/M4A4-mercado.png" alt="M4A4">
@@ -83,6 +99,7 @@
                                 <button class="boton-peque" onclick="toggleCart(this)">AÑADIR</button>
                             </article>
 
+                            <!-- Producto 5 -->
                             <article class="item" id="prod-5">
                                 <div class="item-img">
                                     <img src="img/mercado/AK-47-mercado.png" alt="AK-47">
@@ -93,6 +110,7 @@
                                 <button class="boton-peque" onclick="toggleCart(this)">AÑADIR</button>
                             </article>
 
+                            <!-- Producto 6 -->
                             <article class="item" id="prod-6">
                                 <div class="item-img">
                                     <img src="img/mercado/BayonetaM9-mercado.png" alt="Bayoneta">
@@ -110,6 +128,7 @@
                 </div>
             </div>
 
+            <!-- Inventario Externo (Solo visual por ahora) -->
             <div class="inventario">
                 <div class="slot vacio"></div>
                 <div class="slot vacio"></div>
@@ -120,6 +139,9 @@
         </section>
 
 
+        <!-- ========================================== -->
+        <!-- ESCENA 3: CONFIRMACIÓN (LOADOUT)           -->
+        <!-- ========================================== -->
         <section id="scene-3" class="escena">
             <div class="tarjeta">
                 <header class="cabecera">
@@ -131,6 +153,7 @@
                     <div class="grid cols-2">
                         <div class="item">
                             <span class="desc">ATAQUE</span>
+                            <!-- ID necesario para que JS actualice el valor -->
                             <span class="precio" id="final-atk">100</span>
                         </div>
                         <div class="item">
@@ -151,6 +174,7 @@
                 </div>
             </div>
 
+            <!-- Aquí podrías mostrar los items comprados -->
             <div class="inventario">
                 <div class="slot"><img src="img/mercado/M4A4-mercado.png" alt="M4"></div>
                 <div class="slot"><img src="img/mercado/Kevlar-mercado.png" alt="Kevlar"></div>
@@ -161,6 +185,9 @@
         </section>
 
 
+        <!-- ========================================== -->
+        <!-- ESCENA 4: ENEMIGOS                         -->
+        <!-- ========================================== -->
         <section id="scene-4" class="escena">
             <div class="tarjeta">
                 <header class="cabecera">
@@ -171,36 +198,40 @@
                     <div class="scroll-box">
                         <div class="grid cols-3">
                             
+                            <!-- Enemigo 1 -->
                             <div class="item">
                                 <div class="item-img">
                                     <img src="img/personaje/enemigos/enemigo_debil_1.png" alt="Terrorista">
                                 </div>
                                 <h3>RECLUTA T.</h3>
-                                <p class="desc">8 ATK</p>
+                                <p class="desc">10 ATK</p>
                             </div>
 
+                            <!-- Enemigo 2 -->
                             <div class="item">
                                 <div class="item-img">
                                     <img src="img/personaje/enemigos/enemigo_debil_2.png" alt="Sniper">
                                 </div>
                                 <h3>SNIPER</h3>
-                                <p class="desc">12 ATK</p>
+                                <p class="desc">20 ATK</p>
                             </div>
 
+                            <!-- Enemigo 3 -->
                             <div class="item">
                                 <div class="item-img">
                                     <img src="img/personaje/enemigos/enemigo_medio.png" alt="Bandido">
                                 </div>
                                 <h3>MERCENARIO</h3>
-                                <p class="desc">15 ATK</p>
+                                <p class="desc">30 ATK</p>
                             </div>
 
+                            <!-- Jefe Final (Clase .jefe) -->
                             <div class="item jefe">
                                 <div class="item-img">
                                     <img src="img/personaje/enemigos/jefe_ghost.png" alt="Jefe">
                                 </div>
-                                <h3 class="texto-acento">LÍDER DE ÉLITE</h3>
-                                <p class="desc">28 ATK</p>
+                                <h3 class="texto-acento">LÍDER GHOST</h3>
+                                <p class="desc">45 ATK</p>
                             </div>
 
                         </div>
@@ -212,6 +243,9 @@
         </section>
 
 
+        <!-- ========================================== -->
+        <!-- ESCENA 5: BATALLA                          -->
+        <!-- ========================================== -->
         <section id="scene-5" class="escena">
             <div class="tarjeta">
                 <header class="cabecera">
@@ -221,23 +255,26 @@
                 <div class="contenido">
                     
                     <div class="arena">
+                        <!-- Jugador -->
                         <div>
                             <img src="img/personaje/ct-cs2.png" alt="Jugador" class="anim-entrada" width="100">
                         </div>
 
                         <div class="vs">VS</div>
 
-                        <div>
-                            <img src="img/personaje/enemigos/enemigo_debil_1.png" alt="Enemigo" class="anim-entrada" width="100">
+                        <!-- Enemigo (Imagen dinámica con ID) -->
+                        <div class="fighter-box enemy-side">
+                            <img id="img-enemigo" src="img/personaje/enemigos/enemigo_debil_1.png" alt="Enemigo" class="anim-entrada" width="100">
                         </div>
                     </div>
 
                     <div class="item" style="width: 100%; background: #000;">
-                        <h2 class="titulo">GANADOR: <span class="texto-verde">OPERADOR CT</span></h2>
-                        <p class="desc">Puntos ganados: <span class="texto-acento">100</span></p>
+                        <!-- Resultados dinámicos con IDs -->
+                        <h2 class="titulo" id="battle-msg">...</h2>
+                        <p class="desc" id="battle-points">...</p>
                     </div>
 
-                    <button class="boton">SIGUIENTE RONDA</button>
+                    <button class="boton" id="btn-next-battle">SIGUIENTE RONDA</button>
                 </div>
             </div>
 
@@ -250,8 +287,34 @@
             </div>
         </section>
 
+        <!-- ========================================== -->
+        <!-- ESCENA 6: RANKING (FINAL)                  -->
+        <!-- ========================================== -->
+        <section id="scene-6" class="escena">
+            <div class="tarjeta">
+                <header class="cabecera">
+                    <h2 class="titulo">RESULTADO DE LA MISIÓN</h2>
+                </header>
+
+                <div class="contenido">
+                    <div class="item" style="padding: 40px; width: 100%;">
+                        <h2 class="titulo">RANGO ALCANZADO:</h2>
+                        <!-- ID para mostrar el rango -->
+                        <h1 class="texto-acento" style="font-size: 2rem; margin: 20px 0;" id="rank-final">???</h1>
+                        
+                        <p class="desc" style="font-size: 1rem;">Puntuación Final:</p>
+                        <!-- ID para mostrar la puntuación -->
+                        <p class="precio" style="font-size: 1.5rem;" id="score-final">0</p>
+                    </div>
+
+                    <button class="boton" onclick="location.reload()">REINICIAR OPERACIÓN</button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <script src="src/script.js"></script>
+
+    <script type="module" src="src/Main.js"></script>
 </body>
 </html>
