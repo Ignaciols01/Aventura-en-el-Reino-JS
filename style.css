@@ -369,3 +369,63 @@ body {
         transform: translateX(0); /* Termina en su sitio */
     }
 }
+
+
+
+/* =========================================
+   10. RESPONSIVIDAD (MEDIA QUERIES)
+   ========================================= */
+
+/* Tablets y pantallas medianas (hasta 768px) */
+@media (max-width: 768px) {
+    /* Forzamos 2 columnas en vez de 3 para que no se vea apretado */
+    .grid.cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* En batalla, ponemos al jugador arriba y enemigo abajo */
+    .arena {
+        flex-direction: column; 
+        gap: 20px;
+        padding: 20px 0;
+    }
+    
+    /* Giramos el VS para que quede vertical */
+    .vs {
+        margin: 10px 0;
+        transform: rotate(90deg); 
+    }
+}
+
+/* Móviles pequeños (hasta 480px - Cubre el requisito de 360px) */
+@media (max-width: 480px) {
+    
+    /* Todo a una sola columna */
+    .grid.cols-3, .grid.cols-2 {
+        grid-template-columns: 1fr; 
+    }
+
+    /* Ajustamos la cabecera para que el avatar y título se centren */
+    .cabecera {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Botones más grandes para facilitar el toque */
+    .boton {
+        width: 100%; 
+        padding: 12px;
+    }
+
+    /* Ajuste del inventario para evitar que se desborde */
+    .inventario {
+        justify-content: flex-start;
+        overflow-x: auto; /* Permite scroll lateral solo en la barrita de items */
+        padding-bottom: 5px;
+    }
+    
+    /* Reducimos un poco el título si es muy largo */
+    .titulo {
+        font-size: 1.1rem;
+    }
+}
